@@ -51,7 +51,7 @@ int main() {
         printf("%i %f\n", f.i, f.f);
     }
 
-
+    // dynamic string allocation:
     StrArr str = {};
     StrArr_push(&str, 'H');
     StrArr_push(&str, 'e');
