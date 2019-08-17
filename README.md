@@ -9,6 +9,7 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 * StrViu: string view and functions for it
 * Scope: handles cleanup
 * DynArray: creates a dynamic array of a given type
+* HashMap: creates a hashmap for a given key and value type
 
 
 ## StrViu
@@ -108,8 +109,41 @@ int main() {
     // frees the array
     StrArr_kill(&str);
 }
+```
 
+## HashMap
+In the header file [hashmap.h](include/utilc/hashmap.h) are macros to create hash maps.
+The macro HashMap takes besides the name, the types for key and value.
+And the four functions: hash from key, key compare, key copy and key kill.
+The macro StrHashMap is a sub macro, in which the key is pre defined as const char *, 
+so only the name and value type are needed.
+```c
+#include "hashmap.h"
+//...
 
+// define a hash map with a string as key and an int as value
+StrHashMap(IntMap, int)
+
+int main() {
+
+    IntMap map;
+    IntMap_new(&map, 10);
+    
+    // get and add entry, if not available in the map
+    *IntMap_get(&map, "test") = 1;
+    *IntMap_get(&map, "Hello World") = 3;
+    int *val = IntMap_get(&map, "test");
+    *val = -1;
+
+    //...
+
+    // removing the map entry "Hello World"
+    IntMap_remove(&map, "Hello World");
+
+    //...
+
+    IntMap_kill(&map);
+}
 ```
 
 ## Running the examples
