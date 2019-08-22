@@ -15,3 +15,7 @@ target_include_directories(dynarray PUBLIC include)
 
 add_executable(hashmap examples/hashmap_example.c)
 target_include_directories(hashmap PUBLIC include)
+
+add_executable(vecmath examples/vecmath_example.c)
+target_include_directories(vecmath PUBLIC include)
+target_link_libraries(vecmath m)

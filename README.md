@@ -10,6 +10,7 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 * Scope: handles cleanup
 * DynArray: creates a dynamic array of a given type
 * HashMap: creates a hashmap for a given key and value type
+* VecMath: macros for vector math
 
 
 ## StrViu
@@ -144,6 +145,28 @@ int main() {
 
     IntMap_kill(&map);
 }
+```
+
+## VecMath
+The header file [vecmath.h](include/utilc/vecmath.h) defines multiple macros for vector math.
+Each macro (e. g. VecDot) can be used with different number types (int, float, ...).
+If a macro is only for floats, it is marked as Vecf (e. g. VecfNorm), their also macros for doubles with Vecd.
+The Vec3Cross macro needs and only uses the first 3 elements of the vectors.
+```c
+#include "vecmath.h"
+//...
+
+int main() {
+
+    float vec[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    float res[10];
+    VecVecScale(res, vec, vec, 10)
+    float norm;
+    VecfNorm(norm, res, 10)
+    printf("%f\n", norm);
+
+    // output:
+    //123.826492
 ```
 
 ## Running the examples
