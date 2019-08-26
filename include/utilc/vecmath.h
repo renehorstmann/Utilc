@@ -16,13 +16,13 @@
 //
 
 /** vec<n> res_i = vec_i */
-#define VecSetVec(out_set, vec, n)\
+#define VecCopy(out_set, vec, n)\
 for (int i = 0; i < (n); i++) {\
     (out_set)[i] = (vec)[i];\
 }
 
 /** vec<n> res_i = scalar */
-#define VecSetSca(out_set, scalar, n)\
+#define VecSet(out_set, scalar, n)\
 for (int i = 0; i < (n); i++) {\
     (out_set)[i] = (scalar);\
 }
@@ -96,13 +96,13 @@ for (int i = 0; i < (n); i++) {\
 // vec = float
 //
 /** vec<n> dst_i = vec_i */
-static void vec_set_vec(float *dst_vec, const float *vec, int n) {
+static void vec_copy(float *dst_vec, const float *vec, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec[i];
 }
 
 /** vec<n> dst_i = scalar */
-static void vec_set_sca(float *dst_vec, float scalar, int n) {
+static void vec_set(float *dst_vec, float scalar, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = scalar;
 }
@@ -177,13 +177,13 @@ static void vec_normalize(float *dst_vec, const float *vec, int n) {
 // vecd = double
 //
 /** vec<n> dst_i = vec_i */
-static void vecd_set_vec(double *dst_vec, const double *vec, int n) {
+static void vecd_copy(double *dst_vec, const double *vec, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = vec[i];
 }
 
 /** vec<n> dst_i = scalar */
-static void vecd_set_sca(double *dst_vec, double scalar, int n) {
+static void vecd_set(double *dst_vec, double scalar, int n) {
     for (int i = 0; i < n; i++)
         dst_vec[i] = scalar;
 }
@@ -266,7 +266,7 @@ typedef struct {
 } Vec3;
 
 /** vec<n> dst_i = vec_i */
-static Vec3 vec3_set_vec(const float *vec) {
+static Vec3 vec3_copy(const float *vec) {
     Vec3 res;
     for (int i = 0; i < 3; i++)
         res.v[i] = vec[i];
@@ -274,7 +274,7 @@ static Vec3 vec3_set_vec(const float *vec) {
 }
 
 /** vec<n> dst_i = scalar */
-static Vec3 vec3_set_sca(float scalar) {
+static Vec3 vec3_set(float scalar) {
     Vec3 res;
     for (int i = 0; i < 3; i++)
         res.v[i] = scalar;
@@ -344,7 +344,7 @@ typedef struct {
 } Vec3d;
 
 /** vec<n> dst_i = vec_i */
-static Vec3d vec3d_set_vec(const double *vec) {
+static Vec3d vec3d_copy(const double *vec) {
     Vec3d res;
     for (int i = 0; i < 3; i++)
         res.v[i] = vec[i];
@@ -352,7 +352,7 @@ static Vec3d vec3d_set_vec(const double *vec) {
 }
 
 /** vec<n> dst_i = scalar */
-static Vec3d vec3d_set_sca(double scalar) {
+static Vec3d vec3d_set(double scalar) {
     Vec3d res;
     for (int i = 0; i < 3; i++)
         res.v[i] = scalar;
@@ -422,7 +422,7 @@ typedef struct {
 } Vec4;
 
 /** vec<n> dst_i = vec_i */
-static Vec4 vec4_set_vec(const float *vec) {
+static Vec4 vec4_copy(const float *vec) {
     Vec4 res;
     for (int i = 0; i < 4; i++)
         res.v[i] = vec[i];
@@ -430,7 +430,7 @@ static Vec4 vec4_set_vec(const float *vec) {
 }
 
 /** vec<n> dst_i = scalar */
-static Vec4 vec4_set_sca(float scalar) {
+static Vec4 vec4_set(float scalar) {
     Vec4 res;
     for (int i = 0; i < 4; i++)
         res.v[i] = scalar;
@@ -501,7 +501,7 @@ typedef struct {
 } Vec4d;
 
 /** vec<n> dst_i = vec_i */
-static Vec4d vec4d_set_vec(const double *vec) {
+static Vec4d vec4d_copy(const double *vec) {
     Vec4d res;
     for (int i = 0; i < 4; i++)
         res.v[i] = vec[i];
@@ -509,7 +509,7 @@ static Vec4d vec4d_set_vec(const double *vec) {
 }
 
 /** vec<n> dst_i = scalar */
-static Vec4d vec4d_set_sca(double scalar) {
+static Vec4d vec4d_set(double scalar) {
     Vec4d res;
     for (int i = 0; i < 4; i++)
         res.v[i] = scalar;
