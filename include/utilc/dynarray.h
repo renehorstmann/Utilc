@@ -54,8 +54,7 @@ static type *name ## _append(name *self) { \
 static type name ## _pop(name *self) { \
     if(self->size > 0) \
         return self->array[--self->size]; \
-    type t; \
-    return t; \
+    return (type) {0}; \
 }
 
 
