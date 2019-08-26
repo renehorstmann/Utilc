@@ -76,12 +76,15 @@ for (int i = 0; i < (n); i++) {\
     }\
 }
 
-/** vec3 res = a cross b */
-#define Vec3Cross(out_vec3, vec3_a, vec3_b)\
+/** vec3 res = a cross b, all values after the third will be set to 1 */
+#define VecCross(out_vec, vec_a, vec_b, n)\
 {\
-    (out_vec3)[0] = (vec3_a)[1] * (vec3_b)[2] - (vec3_a)[2] * (vec3_b)[1];\
-    (out_vec3)[1] = (vec3_a)[2] * (vec3_b)[0] - (vec3_a)[0] * (vec3_b)[2];\
-    (out_vec3)[2] = (vec3_a)[0] * (vec3_b)[1] - (vec3_a)[1] * (vec3_b)[0];\
+    (out_vec)[0] = (vec_a)[1] * (vec_b)[2] - (vec_a)[2] * (vec_b)[1];\
+    (out_vec)[1] = (vec_a)[2] * (vec_b)[0] - (vec_a)[0] * (vec_b)[2];\
+    (out_vec)[2] = (vec_a)[0] * (vec_b)[1] - (vec_a)[1] * (vec_b)[0];\
+    for (int i=3; i<n; i++) {\
+        (out_vec)[i] = 1;\
+    }\
 }
 
 //
@@ -150,11 +153,13 @@ static float vec_dot(const float *vec_a, const float *vec_b, int n) {
     return dot;
 }
 
-/** vec3 dst = a cross b */
-static void vec_cross3(float *dst_vec, const float *vec3_a, const float *vec3_b) {
-    dst_vec[0] = vec3_a[1] * vec3_b[2] - vec3_a[2] * vec3_b[1];
-    dst_vec[1] = vec3_a[2] * vec3_b[0] - vec3_a[0] * vec3_b[2];
-    dst_vec[2] = vec3_a[0] * vec3_b[1] - vec3_a[1] * vec3_b[0];
+/** vec3 dst = a cross b, all values after the third will be set to 1 */
+static void vec_cross(float *dst_vec, const float *vec_a, const float *vec_b, int n) {
+    dst_vec[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
+    dst_vec[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
+    dst_vec[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
+    for (int i = 3; i < n; i++)
+        dst_vec[i] = 1;
 }
 
 /** returns norm2 of a float vector */
@@ -229,11 +234,13 @@ static double vecd_dot(const double *vec_a, const double *vec_b, int n) {
     return dot;
 }
 
-/** vec3 dst = a cross b */
-static void vecd_cross3(double *dst_vec, const double *vec3_a, const double *vec3_b) {
-    dst_vec[0] = vec3_a[1] * vec3_b[2] - vec3_a[2] * vec3_b[1];
-    dst_vec[1] = vec3_a[2] * vec3_b[0] - vec3_a[0] * vec3_b[2];
-    dst_vec[2] = vec3_a[0] * vec3_b[1] - vec3_a[1] * vec3_b[0];
+/** vec3 dst = a cross b, all values after the third will be set to 1 */
+static void vecd_cross(double *dst_vec, const double *vec_a, const double *vec_b, int n) {
+    dst_vec[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
+    dst_vec[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
+    dst_vec[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
+    for (int i = 3; i < n; i++)
+        dst_vec[i] = 1;
 }
 
 /** returns norm2 of a double vector */
@@ -315,11 +322,11 @@ static Vec3 vec3_scale_sca(const float *vec_a, float scalar_b) {
 }
 
 /** vec3 dst = a cross b */
-static Vec3 vec3_cross(const float *vec3_a, const float *vec3_b) {
+static Vec3 vec3_cross(const float *vec_a, const float *vec_b) {
     Vec3 res;
-    res.v[0] = vec3_a[1] * vec3_b[2] - vec3_a[2] * vec3_b[1];
-    res.v[1] = vec3_a[2] * vec3_b[0] - vec3_a[0] * vec3_b[2];
-    res.v[2] = vec3_a[0] * vec3_b[1] - vec3_a[1] * vec3_b[0];
+    res.v[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
+    res.v[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
+    res.v[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
     return res;
 }
 
@@ -393,11 +400,11 @@ static Vec3d vec3d_scale_sca(const double *vec_a, double scalar_b) {
 }
 
 /** vec3 dst = a cross b */
-static Vec3d vec3d_cross(const double *vec3_a, const double *vec3_b) {
+static Vec3d vec3d_cross(const double *vec_a, const double *vec_b) {
     Vec3d res;
-    res.v[0] = vec3_a[1] * vec3_b[2] - vec3_a[2] * vec3_b[1];
-    res.v[1] = vec3_a[2] * vec3_b[0] - vec3_a[0] * vec3_b[2];
-    res.v[2] = vec3_a[0] * vec3_b[1] - vec3_a[1] * vec3_b[0];
+    res.v[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
+    res.v[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
+    res.v[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
     return res;
 }
 
@@ -470,6 +477,16 @@ static Vec4 vec4_scale_sca(const float *vec_a, float scalar_b) {
     return res;
 }
 
+/** vec4 dst = a cross b, the fourth component (w) will be set to 1 */
+static Vec4 vec4_cross(const float *vec_a, const float *vec_b) {
+    Vec4 res;
+    res.v[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
+    res.v[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
+    res.v[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
+    res.v[3] = 1;
+    return res;
+}
+
 /** dst = vec / norm(vec) */
 static Vec4 vec4_normalize(const float *vec) {
     return vec4_scale_sca(vec, 1.0f / vec_norm(vec, 4));
@@ -536,6 +553,16 @@ static Vec4d vec4d_scale_sca(const double *vec_a, double scalar_b) {
     Vec4d res;
     for (int i = 0; i < 4; i++)
         res.v[i] = vec_a[i] * scalar_b;
+    return res;
+}
+
+/** vec4 dst = a cross b, the fourth component (w) will be set to 1 */
+static Vec4d vec4d_cross(const double *vec_a, const double *vec_b) {
+    Vec4d res;
+    res.v[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
+    res.v[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
+    res.v[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
+    res.v[3] = 1;
     return res;
 }
 

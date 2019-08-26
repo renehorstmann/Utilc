@@ -32,7 +32,7 @@ int main() {
     print_vec(res, 3);
     // 9.000000 18.000000 27.000000
 
-    vec_cross3(res, x, y);
+    vec_cross(res, x, y, 3);
     print_vec(res, 3);
     // 0.000000 0.000000 1.000000
 
