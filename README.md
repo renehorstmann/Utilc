@@ -172,6 +172,7 @@ int main() {
     // output:
     //123.826492
     // 22.980000
+}
 ```
 
 ## Running the examples
