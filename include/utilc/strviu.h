@@ -64,10 +64,10 @@ static StrViu sv_strip(StrViu viu, char strip) {
 static StrViu sv_next_split(StrViu viu, char split) {
     StrViu res = {viu.begin, viu.begin + 1};
     if (split == ' ') {
-        while (res.end <= viu.end && !isspace(*res.end))
+        while (res.end < viu.end && !isspace(*res.end))
             res.end++;
     } else {
-        while (res.end <= viu.end && *res.end != split)
+        while (res.end < viu.end && *res.end != split)
             res.end++;
     }
     return res;
