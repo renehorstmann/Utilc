@@ -11,6 +11,7 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 * DynArray: creates a dynamic array of a given type
 * HashMap: creates a hashmap for a given key and value type
 * VecMath: macros and functions for vector math
+* MatMath: functions for matrix math
 
 
 ## StrViu
@@ -172,6 +173,39 @@ int main() {
     // output:
     //123.826492
     // 22.980000
+}
+```
+
+## MatMath
+The header file [matmath.h](include/utilc/matmath.h) defines multiple functions for squared matrix math.
+There are typed functions for float and double (mat/ matd).
+And for 3x3 and 4x4 component matrices (mat33(d) and mat44(d)).
+One can use this header file, together with the [vecmath.h](include/utilc/vecmath.h) header, 
+to use functions like set, copy or scale (vec_copy(dst_mat, src_mat, 9)).
+```c
+#include "matmath.h"
+//...
+
+int main() {
+
+    float mat33[] = {1, 2, 3, 40, 50, 60, 0, -1, 5};
+    float det = mat_determinant33(mat33);
+    printf("%f\n", det);
+
+    float inv[9];
+    mat_invert33(inv, mat33);
+    float col[3];
+    mat_col(col, inv, 0, 3);
+    printf("%f %f %f\n", col[0], col[1], col[2]);
+
+    // double typed function with specified size
+    Mat44d mat_d = mat44d_eye();
+    printf("%f\n", mat_d.m[1*4+1]);
+
+    // output:
+    // -210.000000
+    // -1.476191 0.952381 0.190476
+    // 1.000000
 }
 ```
 

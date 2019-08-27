@@ -22,3 +22,7 @@ target_include_directories(hashmap PUBLIC include)
 add_executable(vecmath examples/vecmath_example.c)
 target_include_directories(vecmath PUBLIC include)
 target_link_libraries(vecmath m)
+
+add_executable(matmath examples/matmath_example.c)
+target_include_directories(matmath PUBLIC include)
+target_link_libraries(matmath m)
