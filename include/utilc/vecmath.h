@@ -268,65 +268,56 @@ typedef struct {
 /** vec<n> dst_i = vec_i */
 static Vec3 vec3_copy(const float *vec) {
     Vec3 res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec[i];
+    vec_copy(res.v, vec, 3);
     return res;
 }
 
 /** vec<n> dst_i = scalar */
 static Vec3 vec3_set(float scalar) {
     Vec3 res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = scalar;
+    vec_set(res.v, scalar, 3);
     return res;
 }
 
 /** vec<n> dst_i = a_i + b_i */
 static Vec3 vec3_add_vec(const float *vec_a, const float *vec_b) {
     Vec3 res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] + vec_b[i];
+    vec_add_vec(res.v, vec_a, vec_b, 3);
     return res;
 }
 
 /** vec<n> dst_i = a_i + b */
 static Vec3 vec3_add_sca(const float *vec_a, float scalar_b) {
     Vec3 res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] + scalar_b;
+    vec_add_sca(res.v, vec_a, scalar_b, 3);
     return res;
 }
 
 /** vec<n> dst_i = a_i - b_i */
 static Vec3 vec3_sub_vec(const float *vec_a, const float *vec_b) {
     Vec3 res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] - vec_b[i];
+    vec_sub_vec(res.v, vec_a, vec_b, 3);
     return res;
 }
 
 /** vec<n> dst_i = a_i * b_i */
 static Vec3 vec3_scale_vec(const float *vec_a, const float *vec_b) {
     Vec3 res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] * vec_b[i];
+    vec_scale_vec(res.v, vec_a, vec_b, 3);
     return res;
 }
 
 /** vec<n> res_i = a_i * b */
 static Vec3 vec3_scale_sca(const float *vec_a, float scalar_b) {
     Vec3 res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] * scalar_b;
+    vec_scale_sca(res.v, vec_a, scalar_b, 3);
     return res;
 }
 
 /** vec3 dst = a cross b */
 static Vec3 vec3_cross(const float *vec_a, const float *vec_b) {
     Vec3 res;
-    res.v[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
-    res.v[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
-    res.v[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
+    vec_cross(res.v, vec_a, vec_b, 3);
     return res;
 }
 
@@ -346,65 +337,56 @@ typedef struct {
 /** vec<n> dst_i = vec_i */
 static Vec3d vec3d_copy(const double *vec) {
     Vec3d res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec[i];
+    vecd_copy(res.v, vec, 3);
     return res;
 }
 
 /** vec<n> dst_i = scalar */
 static Vec3d vec3d_set(double scalar) {
     Vec3d res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = scalar;
+    vecd_set(res.v, scalar, 3);
     return res;
 }
 
 /** vec<n> dst_i = a_i + b_i */
 static Vec3d vec3d_add_vec(const double *vec_a, const double *vec_b) {
     Vec3d res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] + vec_b[i];
+    vecd_add_vec(res.v, vec_a, vec_b, 3);
     return res;
 }
 
 /** vec<n> dst_i = a_i + b */
 static Vec3d vec3d_add_sca(const double *vec_a, double scalar_b) {
     Vec3d res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] + scalar_b;
+    vecd_add_sca(res.v, vec_a, scalar_b, 3);
     return res;
 }
 
 /** vec<n> dst_i = a_i - b_i */
 static Vec3d vec3d_sub_vec(const double *vec_a, const double *vec_b) {
     Vec3d res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] - vec_b[i];
+    vecd_sub_vec(res.v, vec_a, vec_b, 3);
     return res;
 }
 
 /** vec<n> dst_i = a_i * b_i */
 static Vec3d vec3d_scale_vec(const double *vec_a, const double *vec_b) {
     Vec3d res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] * vec_b[i];
+    vecd_scale_vec(res.v, vec_a, vec_b, 3);
     return res;
 }
 
 /** vec<n> res_i = a_i * b */
 static Vec3d vec3d_scale_sca(const double *vec_a, double scalar_b) {
     Vec3d res;
-    for (int i = 0; i < 3; i++)
-        res.v[i] = vec_a[i] * scalar_b;
+    vecd_scale_sca(res.v, vec_a, scalar_b, 3);
     return res;
 }
 
 /** vec3 dst = a cross b */
 static Vec3d vec3d_cross(const double *vec_a, const double *vec_b) {
     Vec3d res;
-    res.v[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
-    res.v[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
-    res.v[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
+    vecd_cross(res.v, vec_a, vec_b, 3);
     return res;
 }
 
@@ -424,66 +406,56 @@ typedef struct {
 /** vec<n> dst_i = vec_i */
 static Vec4 vec4_copy(const float *vec) {
     Vec4 res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec[i];
+    vec_copy(res.v, vec, 4);
     return res;
 }
 
 /** vec<n> dst_i = scalar */
 static Vec4 vec4_set(float scalar) {
     Vec4 res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = scalar;
+    vec_set(res.v, scalar, 4);
     return res;
 }
 
 /** vec<n> dst_i = a_i + b_i */
 static Vec4 vec4_add_vec(const float *vec_a, const float *vec_b) {
     Vec4 res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] + vec_b[i];
+    vec_add_vec(res.v, vec_a, vec_b, 4);
     return res;
 }
 
 /** vec<n> dst_i = a_i + b */
 static Vec4 vec4_add_sca(const float *vec_a, float scalar_b) {
     Vec4 res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] + scalar_b;
+    vec_add_sca(res.v, vec_a, scalar_b, 4);
     return res;
 }
 
 /** vec<n> dst_i = a_i - b_i */
 static Vec4 vec4_sub_vec(const float *vec_a, const float *vec_b) {
     Vec4 res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] - vec_b[i];
+    vec_sub_vec(res.v, vec_a, vec_b, 4);
     return res;
 }
 
 /** vec<n> dst_i = a_i * b_i */
 static Vec4 vec4_scale_vec(const float *vec_a, const float *vec_b) {
     Vec4 res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] * vec_b[i];
+    vec_scale_vec(res.v, vec_a, vec_b, 4);
     return res;
 }
 
 /** vec<n> res_i = a_i * b */
 static Vec4 vec4_scale_sca(const float *vec_a, float scalar_b) {
     Vec4 res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] * scalar_b;
+    vec_scale_sca(res.v, vec_a, scalar_b, 4);
     return res;
 }
 
 /** vec4 dst = a cross b, the fourth component (w) will be set to 1 */
 static Vec4 vec4_cross(const float *vec_a, const float *vec_b) {
     Vec4 res;
-    res.v[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
-    res.v[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
-    res.v[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
-    res.v[3] = 1;
+    vec_cross(res.v, vec_a, vec_b, 4);
     return res;
 }
 
@@ -503,66 +475,56 @@ typedef struct {
 /** vec<n> dst_i = vec_i */
 static Vec4d vec4d_copy(const double *vec) {
     Vec4d res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec[i];
+    vecd_copy(res.v, vec, 4);
     return res;
 }
 
 /** vec<n> dst_i = scalar */
 static Vec4d vec4d_set(double scalar) {
     Vec4d res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = scalar;
+    vecd_set(res.v, scalar, 4);
     return res;
 }
 
 /** vec<n> dst_i = a_i + b_i */
 static Vec4d vec4d_add_vec(const double *vec_a, const double *vec_b) {
     Vec4d res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] + vec_b[i];
+    vecd_add_vec(res.v, vec_a, vec_b, 4);
     return res;
 }
 
 /** vec<n> dst_i = a_i + b */
 static Vec4d vec4d_add_sca(const double *vec_a, double scalar_b) {
     Vec4d res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] + scalar_b;
+    vecd_add_sca(res.v, vec_a, scalar_b, 4);
     return res;
 }
 
 /** vec<n> dst_i = a_i - b_i */
 static Vec4d vec4d_sub_vec(const double *vec_a, const double *vec_b) {
     Vec4d res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] - vec_b[i];
+    vecd_sub_vec(res.v, vec_a, vec_b, 4);
     return res;
 }
 
 /** vec<n> dst_i = a_i * b_i */
 static Vec4d vec4d_scale_vec(const double *vec_a, const double *vec_b) {
     Vec4d res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] * vec_b[i];
+    vecd_scale_vec(res.v, vec_a, vec_b, 4);
     return res;
 }
 
 /** vec<n> res_i = a_i * b */
 static Vec4d vec4d_scale_sca(const double *vec_a, double scalar_b) {
     Vec4d res;
-    for (int i = 0; i < 4; i++)
-        res.v[i] = vec_a[i] * scalar_b;
+    vecd_scale_sca(res.v, vec_a, scalar_b, 4);
     return res;
 }
 
 /** vec4 dst = a cross b, the fourth component (w) will be set to 1 */
 static Vec4d vec4d_cross(const double *vec_a, const double *vec_b) {
     Vec4d res;
-    res.v[0] = vec_a[1] * vec_b[2] - vec_a[2] * vec_b[1];
-    res.v[1] = vec_a[2] * vec_b[0] - vec_a[0] * vec_b[2];
-    res.v[2] = vec_a[0] * vec_b[1] - vec_a[1] * vec_b[0];
-    res.v[3] = 1;
+    vecd_cross(res.v, vec_a, vec_b, 4);
     return res;
 }
 
