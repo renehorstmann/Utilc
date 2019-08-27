@@ -80,7 +80,7 @@ int main() {
     // example for a call to a destructor
     // also valid is fclose() for FILE* for example
     Scope
-    String str = {};
+    String str = {0};
     String_new(&str, "Foo");
     ScopeAddCall(&str, &String_kill)
 

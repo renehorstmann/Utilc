@@ -23,7 +23,7 @@ DynArrayWithoutCopy(point, PointArray)
 int main() {
 
     // creation of a DynArray on the stack
-    FloatArray array = {};
+    FloatArray array = {0};
 
     // copy elements into the end of the DynArray
     for(int i=0; i<10; i++)
@@ -52,7 +52,7 @@ int main() {
     }
 
     // dynamic string allocation:
-    StrArr str = {};
+    StrArr str = {0};
     StrArr_push(&str, 'H');
     StrArr_push(&str, 'e');
     StrArr_push(&str, 'l');
@@ -64,7 +64,7 @@ int main() {
     //...
     StrArr_kill(&str);
 
-    PointArray points = {};
+    PointArray points = {0};
     point *p = PointArray_append(&points);
     (*p)[0] = 20;
     (*p)[1] = 21;

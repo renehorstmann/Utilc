@@ -75,7 +75,7 @@ static StrViu sv_next_split(StrViu viu, char split) {
 
 /** @returns: An StrViuArray, based on viu, containing all non empty splits between each split */
 static StrViuArray sv_split(StrViu viu, char split) {
-    StrViuArray res = {};
+    StrViuArray res = {0};
     for (;;) {
         viu = sv_lstrip(viu, split);
         if (sv_empty(viu))
