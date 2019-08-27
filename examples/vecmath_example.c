@@ -65,16 +65,4 @@ int main() {
     norm = vec_norm(vec3_scale_sca(vec3_add_sca((float[]) {100, 50, 1}, -1).v, 0.1f).v, 3);
     printf("%f\n", norm);
     // 11.046267
-
-    {
-        float vec[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        float res[10];
-        VecScaleVec(res, vec, vec, 10)
-        float norm = vec_norm(res, 10);
-        printf("%f\n", norm);
-
-        Vec3d vec_d = vec3d_add_sca((double[]){-1.23, -2.34, -3.45}, 10);
-        double sum = vecd_sum(vec_d.v, 3);
-        printf("%f\n", sum);
-    }
 }
