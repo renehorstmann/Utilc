@@ -21,3 +21,6 @@ target_include_directories(hashmap PUBLIC include)
 
 add_executable(iterator examples/iterator_example.c)
 target_include_directories(iterator PUBLIC include)
+
+add_executable(alloc examples/alloc_example.c)
+target_include_directories(alloc PUBLIC include)

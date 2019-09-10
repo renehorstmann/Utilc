@@ -11,6 +11,7 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 * DynArray: creates a dynamic array of a given type
 * HashMap: creates a hashmap for a given key and value type
 * Iterator: interface for iterating over ranges or indices
+* Alloc: create space on the heap with error check
 
 
 ## StrViu
@@ -183,6 +184,36 @@ int main() {
     // 99 -2 30 5 6 
 }
 ```
+
+## Alloc
+The file [alloc.h](include/utilc/alloc.h) includes some functions and macros to create space on the heap.
+If the malloc (calloc, realloc) fails, an assertion is thrown.
+```c
+#include "alloc.h"
+//...
+
+int main() {
+    // allocates 10 ints with a checked malloc
+    int *data = New(int, 10);
+
+    // the 20 ints will be 0 (checked calloc)
+    int *data2 = New0(int, 20);
+
+    // checked realloc
+    data = ReNew(int, data, 30);
+
+    // frees data and sets its pointer to NULL
+    Free0(data);
+    assert(data==NULL);
+
+    // unchecked malloc
+    char *str = TryNew(char, 1000);
+
+    // frees both data2 and str (variadic macro)
+    FreeAll(data2, str);
+}
+```
+
 
 ## Running the examples
 The top directory of this project contains a CmakeLists.txt file, which sets up the examples for each library
