@@ -208,9 +208,6 @@ int main() {
 
     // unchecked malloc
     char *str = TryNew(char, 1000);
-
-    // frees both data2 and str (variadic macro)
-    FreeAll(data2, str);
 }
 ```
 

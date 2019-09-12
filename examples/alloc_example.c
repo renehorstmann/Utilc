@@ -6,7 +6,7 @@ int main() {
     int *data = New(int, 10);
 
     // should throw an assert:
-    // data = ReNew(int, data, -1);
+     data = ReNew(int, data, -1);
 
     Free0(data);
     assert(data == NULL);
@@ -26,9 +26,8 @@ int main() {
     struct S *mem = TryNew(struct S, 1000);
 
 
-    // FreeAll also exists...
-    FreeAll0(&str, &str2, &mem) // FreeAll0 needs pointer to the addresses
-    assert(str == NULL && str2 == NULL && mem == NULL);
-
+    Free0(str);
+    Free0(str2);
+    Free0(mem);
     return 0;
 }
