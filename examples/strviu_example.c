@@ -14,8 +14,8 @@ int main() {
     printf("strip: <%s>\n", sv_heap_cpy(viu));
 
     StrViuArray splits = sv_split(viu, ' ');
-    for(int i=0; i<splits.size; i++) {
-        printf("split[%d]: <%s>\n", i, sv_heap_cpy(splits.array[i]));
+    for(size_t i=0; i<splits.size; i++) {
+        printf("split[%zu]: <%s>\n", i, sv_heap_cpy(splits.array[i]));
     }
 
     // determine function parameters:
@@ -28,9 +28,14 @@ int main() {
 
     printf("paremeters: <%s>\n", sv_heap_cpy(viu));
     splits = sv_split(viu, ',');
-    for(int i=0; i<splits.size; i++) {
-        printf("parameter[%d] <%s>\n", i, sv_heap_cpy(sv_strip(splits.array[i], ' ')));
+    for(size_t i=0; i<splits.size; i++) {
+        printf("parameter[%zu] <%s>\n", i, sv_heap_cpy(sv_strip(splits.array[i], ' ')));
     }
+
+
+    viu = ToStrViu("const int ** const ** pttr_fun");
+    int ptr_cnt = sv_count(viu, '*');
+    printf("ptr_fun has %d *\n", ptr_cnt);
 
 
     // program will print:
