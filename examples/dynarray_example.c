@@ -35,7 +35,7 @@ int main() {
         *added = (float)(i*i+100);
     }
 
-    printf("cap: %d\n", array.capacity);
+    printf("cap: %zu\n", array.capacity);
     while(array.size)
         printf("%f\n", FloatArray_pop(&array));
 
@@ -45,7 +45,7 @@ int main() {
     for(int i=0; i<10; i++)
         FooArray_push(foos, (Foo){i, 1.5f*(float)i});
 
-    printf("cap: %d\n", foos->capacity);
+    printf("cap: %zu\n", foos->capacity);
     while(foos->size) {
         Foo f = FooArray_pop(foos);
         printf("%i %f\n", f.i, f.f);
@@ -72,6 +72,6 @@ int main() {
     pi[0] = 30;
     pi[1] = 31;
 
-    for(int i=0; i<points.size; i++)
+    for(size_t i=0; i<points.size; i++)
         printf("%d + %d\n", points.array[i][0], points.array[i][1]);
 }
