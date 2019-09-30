@@ -6,15 +6,15 @@ Copy a header file for its library to your project and have fun.
 The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 
 ### Libraries
-* strviu: string view and functions for it
-* Scope: handles cleanup
-* DynArray: creates a dynamic array of a given type
-* HashMap: creates a hashmap for a given key and value type
-* Iterator: interface for iterating over ranges or indices
-* Alloc: create space on the heap with error check
+* [StrViu](#S-StrViu): string view and functions for it
+* [Scope](#S-Scope): handles cleanup
+* [DynArray](#S-DynArray): creates a dynamic array of a given type
+* [HashMap](#S-HashMap): creates a hashmap for a given key and value type
+* [Iterator](#S-Iterator): interface for iterating over ranges or indices
+* [Alloc](#S-Alloc): create space on the heap with error check
 
 
-## strviu
+## <a name="S-StrViu"></a>StrViu
 [strviu.h](include/utilc/strviu.h) is a library to handle string views in C.
 ```c
 typedef struct {
@@ -51,7 +51,7 @@ int main() {
 }
 ```
 
-## Scope
+## <a name="S-Scope"></a>Scope
 [scope.h](include/utilc/scope.h) is a library to handle multiple deallocations (free) and calling of destructors (void ()(void *)).
 Its especially useful to clear up and return on error in one line
 ```c
@@ -83,7 +83,7 @@ int main() {
 }
 ```
 
-## DynArray
+## <a name="S-DynArray"></a>DynArray
 The library header file [dynarray.h](include/utilc/dynarray.h) defines macros to create dynamic arrays.
 These arrays preallocate memory for faster resizing.
 (like a std::vector)
@@ -113,7 +113,7 @@ int main() {
 }
 ```
 
-## HashMap
+## <a name="S-HashMap"></a>HashMap
 In the header file [hashmap.h](include/utilc/hashmap.h) are macros to create hash maps.
 The macro HashMap takes besides the name, the types for key and value.
 And the four functions: hash from key, key compare, key copy and key kill.
@@ -148,7 +148,7 @@ int main() {
 }
 ```
 
-## Iterator
+## <a name="S-Iterator"></a>Iterator
 The interface intiterator is in the header file [iterator.h](include/utilc/iterator.h).
 This interface can be used to iterate over both, a range (e. g. 0:10, 20:10:-1) or an indices array.
 ```c
@@ -185,7 +185,7 @@ int main() {
 }
 ```
 
-## Alloc
+## <a name="S-Alloc"></a>Alloc
 The file [alloc.h](include/utilc/alloc.h) includes some functions and macros to create space on the heap.
 If the malloc (calloc, realloc) fails, an assertion is thrown.
 ```c
