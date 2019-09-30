@@ -6,7 +6,7 @@ Copy a header file for its library to your project and have fun.
 The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 
 ### Libraries
-* StrViu: string view and functions for it
+* strviu: string view and functions for it
 * Scope: handles cleanup
 * DynArray: creates a dynamic array of a given type
 * HashMap: creates a hashmap for a given key and value type
@@ -14,13 +14,13 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 * Alloc: create space on the heap with error check
 
 
-## StrViu
+## strviu
 [strviu.h](include/utilc/strviu.h) is a library to handle string views in C.
 ```c
 typedef struct {
     char *begin;    // begin of the string
     char *end;      // pointer points after the last character (to the \0 for a cstring)
-} StrViu;
+} strviu;
 ```
 The example shows how to easily use it for parsing strings.
 ```c
@@ -28,7 +28,7 @@ The example shows how to easily use it for parsing strings.
 //...
 int main() {
     // determine function parameters:
-    StrViu viu = ToStrViu("int foo(const char *src  , char *dst\n, int n);");
+    strviu viu = ToStrViu("int foo(const char *src  , char *dst\n, int n);");
     viu = sv_eat_until(viu, '(');                       // sets the start of the view to the next '('
     viu.begin++;                                        // set the start after the '('
     
@@ -36,9 +36,9 @@ int main() {
     viu.end = viu.begin+end_pos;                        // set the end to the ')'
     
     printf("paremeters: <%s>\n", sv_heap_cpy(viu));
-    StrViuArray splits = sv_split(viu, ',');            // returns an array of views, seperated by ','
+    strviuarray splits = sv_split(viu, ',');            // returns an array of views, seperated by ','
     for(int i=0; i<splits.size; i++) {
-        StrViu param = sv_strip(splits.array[i], ' ');  // removes leading and ending ' ' (+ \t,\n)
+        strviu param = sv_strip(splits.array[i], ' ');  // removes leading and ending ' ' (+ \t,\n)
         printf("parameter[%d] <%s>\n", i, sv_heap_cpy(param));
     }
 
@@ -149,13 +149,13 @@ int main() {
 ```
 
 ## Iterator
-The interface IntIterator is in the header file [iterator.h](include/utilc/iterator.h).
+The interface intiterator is in the header file [iterator.h](include/utilc/iterator.h).
 This interface can be used to iterate over both, a range (e. g. 0:10, 20:10:-1) or an indices array.
 ```c
 #include "iterator.h"
 //...
 
-void print_it(const int *index, IntIterator it) {
+void print_it(const int *index, intiterator it) {
     // iterator is valid, until the returned pointer != end
     // it.next(&it) returns the pointer to the next value
     for(;index != it.end; index = it.next(&it)) {
@@ -167,19 +167,19 @@ void print_it(const int *index, IntIterator it) {
 
 int main() {
     // interface object
-    IntIterator it;
+    intiterator it;
 
     // contructor and start for a range counting to (exc.) 10
-    const int *index = IntIterator_range_begin(&it, 10);
+    const int *index = intiterator_range_begin(&it, 10);
     print_it(index, it);
     // 0 1 2 3 4 5 6 7 8 9 
 
-    index = IntIterator_full_range_begin(&it, 20, 0, -3);
+    index = intiterator_full_range_begin(&it, 20, 0, -3);
     print_it(index, it);
     // 20 17 14 11 8 5 2
 
     int indices[5] = {99, -2, 30, 5, 6};
-    index = IntIterator_indices_begin(&it, indices, 5);
+    index = intiterator_indices_begin(&it, indices, 5);
     print_it(index, it);
     // 99 -2 30 5 6 
 }

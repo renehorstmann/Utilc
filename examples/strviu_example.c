@@ -7,13 +7,13 @@ int main() {
 
     // hello world
     const char *cstring = " \t  Hallo Welt  \t\n  ";
-    StrViu viu = ToStrViu(cstring);
+    strviu viu = ToStrViu(cstring);
     printf("start: <%s>\n", sv_heap_cpy(viu));
 
     viu = sv_strip(viu, ' ');   //stripping whitespace uses isspace internally
     printf("strip: <%s>\n", sv_heap_cpy(viu));
 
-    StrViuArray splits = sv_split(viu, ' ');
+    strviuarray splits = sv_split(viu, ' ');
     for(size_t i=0; i<splits.size; i++) {
         printf("split[%zu]: <%s>\n", i, sv_heap_cpy(splits.array[i]));
     }
@@ -49,4 +49,5 @@ int main() {
     //parameter[0] <const char *src>
     //parameter[1] <char *dst>
     //parameter[2] <int n)>
+    //ptr_fun has 4 *
 }
