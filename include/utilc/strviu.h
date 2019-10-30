@@ -444,7 +444,7 @@ static bool sv_ends_with(strviu viu, strviu cmp) {
     if(sv_length(viu) < sv_length(cmp))
         return false;
     size_t len = sv_length(cmp);
-    return strncmp(viu.end-len, cmp, len);
+    return strncmp(viu.end-len, cmp.begin, len);
 }
 
 /** @return: True if viu ends with the string of cmp */
