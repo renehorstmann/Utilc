@@ -431,7 +431,7 @@ static char *sv_heap_cpy(strviu viu) {
 static bool sv_equals(strviu viu, strviu cmp) {
     if(sv_length(viu) != sv_length(cmp))
         return false;
-    return strncmp(viu.begin, cmp.begin, sv_length(cmp));
+    return strncmp(viu.begin, cmp.begin, sv_length(cmp)) == 0;
 }
 
 /** @return: True if viu contains the same chars as cmp */
@@ -443,7 +443,7 @@ static bool sv_equals_cstring(strviu viu, const char *cmp) {
 static bool sv_begins_with(strviu viu, strviu cmp) {
     if(sv_length(viu) < sv_length(cmp))
         return false;
-    return strncmp(viu.begin, cmp.begin, sv_length(cmp));
+    return strncmp(viu.begin, cmp.begin, sv_length(cmp)) == 0;
 }
 
 /** @return: True if viu begins with the string of cmp */
@@ -456,7 +456,7 @@ static bool sv_ends_with(strviu viu, strviu cmp) {
     if(sv_length(viu) < sv_length(cmp))
         return false;
     size_t len = sv_length(cmp);
-    return strncmp(viu.end-len, cmp.begin, len);
+    return strncmp(viu.end-len, cmp.begin, len) == 0;
 }
 
 /** @return: True if viu ends with the string of cmp */
