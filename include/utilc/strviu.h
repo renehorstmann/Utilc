@@ -461,7 +461,7 @@ static bool sv_ends_with(strviu viu, strviu cmp) {
 
 /** @return: True if viu ends with the string of cmp */
 static bool sv_ends_with_cstring(strviu viu, const char *cmp) {
-    return sv_ends_with(ToStrViu(cmp));
+    return sv_ends_with(viu, ToStrViu(cmp));
 }
 
 
