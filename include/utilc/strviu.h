@@ -427,6 +427,18 @@ static char *sv_heap_cpy(strviu viu) {
     return str;
 }
 
+/** @return: True if viu contains the same chars as cmp */
+static bool sv_equals(strviu viu, strviu cmp) {
+    if(sv_length(viu) != sv_length(cmp))
+        return false;
+    return strncmp(viu.begin, cmp.begin, sv_length(cmp));
+}
+
+/** @return: True if viu contains the same chars as cmp */
+static bool sv_equals_cstring(strviu viu, const char *cmp) {
+    return sv_equals(viu, ToStrViu(cmp));
+}
+
 /** @return: True if viu begins with the string of cmp */
 static bool sv_begins_with(strviu viu, strviu cmp) {
     if(sv_length(viu) < sv_length(cmp))
