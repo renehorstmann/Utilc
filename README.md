@@ -7,7 +7,6 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 
 ### Libraries
 * [StrViu](#S-StrViu): string view and functions for it
-* [Scope](#S-Scope): handles cleanup
 * [DynArray](#S-DynArray): creates a dynamic array of a given type
 * [HashMap](#S-HashMap): creates a hashmap for a given key and value type
 * [Iterator](#S-Iterator): interface for iterating over ranges or indices
@@ -48,38 +47,6 @@ int main() {
     //parameter[0] <const char *src>
     //parameter[1] <char *dst>
     //parameter[2] <int n)>
-}
-```
-
-## <a name="S-Scope"></a>Scope
-[scope.h](include/utilc/scope.h) is a library to handle multiple deallocations (free) and calling of destructors (void ()(void *)).
-Its especially useful to clear up and return on error in one line
-```c
-#include "scope.h"
-//...
-int main() {
-    Scope                               // creates the scope
-    
-    int *data = malloc(100);
-    ScopeAddData(&data)                 // adds a pointer to a data_pointer
-    
-    int *not_used = malloc(100);
-    ScopeAddData(&not_used)
-    
-    FILE *file = fopen("file.txt", "r");
-    ScopeAddCall(file, fclose)          // adds a function call 
-    
-    //...
-    int *new_data = realloc(data, 1000);
-    if(!new_data)
-        ScopeLeaveReturn(EXIT_FAILURE)  // frees data, not_used and calls fclose(file), then returns 1
-    data = new_data;
-    
-    //...
-    ScopeRemoveData(data)
-    ScopeLeave                          // frees not_used and calls fclose(file)
-
-    // do smth with data
 }
 ```
 

@@ -7,9 +7,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -march=native)  # march=native for best performance
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-long-long -pedantic -Wno-unused-function -Wno-missing-braces")
 
-add_executable(scope examples/scope_example.c)
-target_include_directories(scope PUBLIC include)
-
 add_executable(strviu examples/strviu_example.c)
 target_include_directories(strviu PUBLIC include)
 
