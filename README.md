@@ -71,7 +71,10 @@ int main() {
 
     // appends a char into the end and returns its pointer    
     char *c = StrArr_append(&str);  
-    *c = '\0';
+    *c = ' ';
+    
+    // copies an array of chars into the string array (6 chars: World + '\0')
+    StrArr_push_array(&str, "World", 6);
     printf("%s", str.array);
     //...
 

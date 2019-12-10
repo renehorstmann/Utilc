@@ -59,7 +59,9 @@ int main() {
     StrArr_push(&str, 'l');
     StrArr_push(&str, 'o');
     char *c = StrArr_append(&str);
-    *c = '\0';
+    *c = ' ';
+    StrArr_push_array(&str, "World", 6);    // World + '\0'
+
     printf("%s\n", str.array);
     //...
     StrArr_kill(&str);
