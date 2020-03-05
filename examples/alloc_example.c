@@ -6,7 +6,7 @@ int main() {
     int *data = New(int, 10);
 
     // should throw an assert:
-     data = ReNew(int, data, -1);
+    // data = ReNew(int, data, -1);
 
     Free0(data);
     assert(data == NULL);

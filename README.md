@@ -17,7 +17,7 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 ## <a name="S-StrViu"></a>StrViu
 [strviu.h](include/utilc/strviu.h) is a library to handle string views in C.
 ```c
-typedef struct {
+typedef struct strviu {
     char *begin;    // begin of the string
     char *end;      // pointer points after the last character (to the \0 for a cstring)
 } strviu;

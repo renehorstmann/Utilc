@@ -5,7 +5,7 @@
 // defines all functions for a float array
 DynArray(float, FloatArray)
 
-typedef struct {
+typedef struct Foo {
     int i;
     float f;
 } Foo;

@@ -5,12 +5,12 @@
 
 StrHashMap(IntMap, int)
 
-typedef struct {
+typedef struct Object{
     int i;
     float f;
 } Object;
 
-typedef struct {
+typedef struct Value {
     const char *val;
     int i;
 } Value;
