@@ -24,6 +24,7 @@ int main() {
 
     // creation of a DynArray on the stack
     FloatArray array = {0};
+    // or:  FloatArray array = DynArray_INIT;
 
     // copy elements into the end of the DynArray
     for(int i=0; i<10; i++)

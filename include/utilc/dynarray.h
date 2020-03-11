@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 
+#define DynArray_INIT {0}
+
 /**
  * Creates an dynamic array of type (type) with the typename name.
  * Construct it as empty struct ( = {};, or calloc).
