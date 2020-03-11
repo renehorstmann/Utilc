@@ -12,6 +12,7 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 * [HashMap](#S-HashMap): creates a hashmap for a given key and value type
 * [Iterator](#S-Iterator): interface for iterating over ranges or indices
 * [Alloc](#S-Alloc): create space on the heap with error check
+* [CleanUp](#S-CleanUp): handles clean ups for a function
 
 
 ## <a name="S-StrViu"></a>StrViu
@@ -218,6 +219,45 @@ int main() {
 
     // unchecked malloc
     char *str = TryNew(char, 1000);
+}
+```
+
+## <a name="S-CleanUp"></a>CleanUp
+The file [cleanup.h](include/utilc/cleanup.h) includes a class to handle clean ups for data and classes.
+Throw your data and their clean functions into CleanUp as items and call clean to clean all your data.
+```c
+#include "cleanup.h"
+//...
+
+int main() {
+    // creates a CleanUp member
+    CleanUp clean = {0};
+
+    // allocate some bytes
+    char *data = (char*) malloc(10);
+    // call free(data) on clean
+    CleanUpAdd(&clean, data, free);
+
+    CleanUpAdd(&clean, "print on clean", puts);
+    
+    CleanUpClean(&clean);
+    // will call (and remove all clean items):
+    //free(data);
+    //puts("print on clean");
+    
+    
+    // Scope variant with pre defined name "clean_up_scobe_member__"
+    CleanUpScopeInit;
+    CleanUpScopeAdd("print on clean (scope)", puts);
+    CleanUpScopeClean;
+    
+#ifdef __GNUC__
+    // automatically calls CleanUpClean when the function exits (GUN_C extension)
+    CleanUpAutoClean autoclean = {0};
+    CleanUpAdd(&autoclean, "print automatically when function returns", puts);
+    
+    // also available as CleanUpScopeAutoCleanInit for the pre defined name as above
+#endif
 }
 ```
 
