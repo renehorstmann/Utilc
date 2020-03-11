@@ -143,7 +143,7 @@ static void free_ptr(void **ptr) {
 
 static void dynamic_ptr() {
     CleanUpScopeInit;
-    char *array = malloc(10);
+    char *array = (char *) malloc(10);
 
     // addind a pointer to array, instead of array itself,
     // so if array points to another mem location, CleanUp will clean the new one.
@@ -152,7 +152,7 @@ static void dynamic_ptr() {
     printf("ptr: %p\n", (void *) array);
 
     // reassign to a new memory location...
-    array = realloc(array, 1000000);
+    array = (char*) realloc(array, 1000000);
 
     printf("ptr: %p\n", (void *) array);
 
