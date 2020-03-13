@@ -34,17 +34,25 @@ static void ObjectMap_impl_keykill(Object key) {
 HashMap(ObjectMap, Object, Value, ObjectMap_impl_hash, ObjectMap_impl_keycmp, ObjectMap_impl_keycpy, ObjectMap_impl_keykill)
 
 
-void printintmap(IntMap map) {
-    puts("\nintmap:");
+void printintmap_manual(IntMap map) {
     for(int i=0; i<map.map_size; i++) {
         printf("hash: %d\n", i);
-        struct IntMap_Item_ *item = map.map[i];
+        IntMap_Item *item = map.map[i];
         while(item) {
             printf("item: key<%s> val<%d>\n",item->key, item->value);
             item = item->next;
         }
     }
 }
+
+void printintmap_iterator(IntMap map) {
+    IntMap_Iter it = IntMap_get_iter(&map);
+    IntMap_Item *item;
+    while((item = IntMap_Iter_next(&it)) != NULL) {
+        printf("item: key<%s> val<%d>\n", item->key, item->value);
+    }
+}
+
 int main() {
 
     IntMap map;
@@ -57,14 +65,19 @@ int main() {
     int *val = IntMap_get(&map, "test");
     *val = -1;
 
-    printintmap(map);
+    puts("manual:");
+    printintmap_manual(map);
 
     IntMap_remove(&map, "");
-    printintmap(map);
+
+    puts("\niterator");
+    printintmap_iterator(map);
 
     IntMap_kill(&map);
-    printintmap(map);
+    puts("\n killed...");
+    printintmap_iterator(map);
 
+    // custom map
     ObjectMap om;
     ObjectMap_new(&om, 1000);
     Value *o = ObjectMap_get(&om, (Object){10, 20.0f});
