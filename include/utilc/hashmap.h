@@ -136,3 +136,4 @@ StrHashMap_impl_hash, StrHashMap_impl_keycmp, StrHashMap_impl_keycpy, StrHashMap
 
 
 #endif //UTILC_HASHMAP_H
+

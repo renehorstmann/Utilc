@@ -113,3 +113,4 @@ static type *name ## _append(name *self) { \
 }
 
 #endif //UTILC_DYNARRAY_H
+

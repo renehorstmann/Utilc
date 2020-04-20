@@ -62,3 +62,4 @@ CleanUp_add(&clean_up_scobe_member__,(void *) (data_ptr), (CLEAN_UP_FUNCTION_TYP
 #define CleanUpScopeClean CleanUp_clean(&clean_up_scobe_member__)
 
 #endif //UTILC_CLEANUP_H
+
