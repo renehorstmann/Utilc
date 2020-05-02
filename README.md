@@ -48,7 +48,7 @@ int main() {
     //, int n>
     //parameter[0] <const char *src>
     //parameter[1] <char *dst>
-    //parameter[2] <int n)>
+    //parameter[2] <int n>
 }
 ```
 
