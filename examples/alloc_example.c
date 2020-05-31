@@ -1,3 +1,4 @@
+#include <assert.h>
 #include "utilc/alloc.h"
 
 int main() {
