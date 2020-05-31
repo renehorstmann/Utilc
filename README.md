@@ -13,6 +13,7 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 * [Iterator](#S-Iterator): interface for iterating over ranges or indices
 * [Alloc](#S-Alloc): create space on the heap with error check
 * [CleanUp](#S-CleanUp): handles clean ups for a function
+* [Assume](#S-Assume): Assertion that also works in release mode
 
 
 ## <a name="S-StrViu"></a>StrViu
@@ -261,6 +262,33 @@ int main() {
 }
 ```
 
+
+## <a name="S-Assume"></a>Assume
+The file [assume.h](include/utilc/assume.h) includes a macro to make a runtime assumtion.
+It works like an improved version of assert, that raises SIGABRT, even if NDEBUG is defined.
+If NDEBUG is defined, only the message will be displayed, without expression, file and line info.
+assume is also a formatted version like printf
+```c
+#include <stdbool.h>
+
+//#define NDEBUG
+#include "utilc/assume.h"
+
+int main() {
+    assume(true, "like assert, nothing happens");
+
+    int sum = 5 + 5;
+    assume(sum == 11, "math should fail, sum is: %d", sum);
+    // will print an error message and raise SIGABRT
+
+
+    // with NDEBUG defined:
+    // An assumption in the program failed: math should fail, sum is: 10
+
+    // without:
+    // Assumption failed: sum == 11 at .../Utilc/examples/assume_example.c:10 math should fail, sum is: 10
+}
+```
 
 ## Running the examples
 The top directory of this project contains a CmakeLists.txt file, which sets up the examples for each library
