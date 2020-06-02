@@ -19,6 +19,9 @@ int main() {
 
     char *c = sp_cat("Hello", " ", "World");
 
+    puts(sp_toupper("Hello World"));
+    puts(sp_tolower("Hello World"));
+
     // removes c from the string pool, so that it will not be freed
     sp_get_ownership(c);
 
