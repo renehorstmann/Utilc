@@ -109,10 +109,10 @@ int main() {
     puts(sp_reverse(abc));          // "FEDCBA"
     puts(sp_iter(abc, 1, 5, 2));    // "BD"
 
-    // replacec into "Hello Foo World"
+    // replaces into "Hello Foo World"
     puts(sp_replace("Hello World", " ", " Foo "));
 
-    // removes abc from the string pool, so that it will not be freed
+    // removes abc from the string pool, so that it wont be freed
     sp_get_ownership(abc);
 
     // will free all created strings from sp_* except of abc
