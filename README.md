@@ -8,6 +8,7 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 ### Libraries
 * [StrViu](#S-StrViu): string view and functions for it
 * [StrViuParse](#S-StrViuParse): additional parsing functions for StrViu
+* [StrPool](#S-StrPool): string pool functions to easily free generated strings
 * [DynArray](#S-DynArray): creates a dynamic array of a given type
 * [HashMap](#S-HashMap): creates a hashmap for a given key and value type
 * [Iterator](#S-Iterator): interface for iterating over ranges or indices
@@ -91,6 +92,34 @@ int main() {
 }
 
 ```
+
+## <a name="S-StrPool"></a>StrPool
+The library header file [strpool.h](include/utilc/strpool.h) defines functions to generate strings in a pool.
+For example the function sp_reverse(src) clones src in reverse order. 
+If sp_free() is called, all generated strings will be freed.
+```c
+#include "utilc/strpool.h"
+// ...
+
+int main() {
+
+    // concatenates to "ABCDEF"
+    char *abc = sp_cat("A", "BC", "DEF");
+
+    puts(sp_reverse(abc));          // "FEDCBA"
+    puts(sp_iter(abc, 1, 5, 2));    // "BD"
+
+    // replacec into "Hello Foo World"
+    puts(sp_replace("Hello World", " ", " Foo "));
+
+    // removes abc from the string pool, so that it will not be freed
+    sp_get_ownership(abc);
+
+    // will free all created strings from sp_* except of abc
+    sp_free();
+}
+```
+
 
 ## <a name="S-DynArray"></a>DynArray
 The library header file [dynarray.h](include/utilc/dynarray.h) defines macros to create dynamic arrays.
