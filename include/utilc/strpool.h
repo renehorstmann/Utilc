@@ -23,7 +23,7 @@
  * @param strings: A list of strings, that ends with NULL
  * @return: dst
  */
-static char *strcat_into_v(char *dst, char **strings) {
+static char *strcat_into_v(char *dst, const char **strings) {
     if(*strings)
         strcpy(dst, *strings++);
     while(*strings)
@@ -31,7 +31,7 @@ static char *strcat_into_v(char *dst, char **strings) {
     return dst;
 }
 /** Concatenates all strings behind dst into dst */
-#define strcat_into(dst, ...) strcat_into_v((dst), (char*[]) {__VA_ARGS__, NULL})
+#define strcat_into(dst, ...) strcat_into_v((dst), (const char*[]) {__VA_ARGS__, NULL})
 
 /**
  * Pool member that stores all created strings in a dynamic list.
@@ -92,26 +92,26 @@ static char *sp_malloc(size_t size) {
  * @param str: the string to search in the pool
  * @return: The given string if found and removed, NULL if not found.
  */
-static char *sp_get_ownership(char *str) {
+static char *sp_get_ownership(const char *str) {
     struct sp_pool *pool = sp_pool_used ? sp_pool_used : &sp_pool_member_;
     for(int i=0; i<pool->data_size; i++) {
         if(pool->data[i] == str) {
             pool->data[i] = NULL;
-            return str;
+            return (char *) str;
         }
     }
     return NULL;
 }
 
 /** Clones a string */
-static char *sp_clone(char *src) {
+static char *sp_clone(const char *src) {
     char *res = sp_malloc(strlen(src));
     strcpy(res, src);
     return res;
 }
 
 /** Clones a string, if length > strlen(src), length+1 bytes will be allocated */
-static char *sp_clone_n(char *src, size_t length) {
+static char *sp_clone_n(const char *src, size_t length) {
     if(strlen(src) > length)
         length = strlen(src);
     char *res = sp_malloc(length + 1);
@@ -120,9 +120,9 @@ static char *sp_clone_n(char *src, size_t length) {
 }
 
 /** Concatenates the strings together (strings must end with a NULL) */
-static char *sp_cat_v(char **strings) {
+static char *sp_cat_v(const char **strings) {
     size_t size = 1;
-    char **it = strings;
+    const char **it = strings;
     while(*it)
         size += strlen(*it++);
     char *res = sp_malloc(size);
@@ -137,9 +137,9 @@ static char *sp_cat_v(char **strings) {
  * Concatenates all given strings together (strings must end with a NULL).
  * If srtlen(*strings) < length, length+1 bytes will be allocated
  */
-static char *sp_cat_n_v(char **strings, size_t length) {
+static char *sp_cat_n_v(const char **strings, size_t length) {
     size_t size = 0;
-    char **it = strings;
+    const char **it = strings;
     while(*it)
         size += strlen(*it++);
     if(size > length)
@@ -153,7 +153,7 @@ static char *sp_cat_n_v(char **strings, size_t length) {
 #define sp_cat_n(...) sp_cat_n_v((char*[]) {__VA_ARGS__, NULL})
 
 /** Iterates and copies src, end can be larger than the string, also all parameters can be negativ */
-static char *sp_iter(char *src, int begin, int end, int step) {
+static char *sp_iter(const char *src, int begin, int end, int step) {
     assert(step != 0 && "sp_iter failed, step must not be 0");
     if(begin < 0)
         begin += (int) strlen(src);
@@ -179,9 +179,12 @@ static char *sp_iter(char *src, int begin, int end, int step) {
 }
 
 /** Returns the reversed string of src (calls sp_iter(src, 0, 0, -1)) */
-static char *sp_reverse(char *src) {
+static char *sp_reverse(const char *src) {
     return sp_iter(src, 0, 0, -1);
 }
+
+static char *sp_replace(char *src, const char *from, const char *to);
+// todo
 
 
 #endif //UTILC_STRPOOL_H
