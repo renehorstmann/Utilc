@@ -131,7 +131,7 @@ static char *sp_cat_v(const char **strings) {
 }
 
 /** Concatenates all given strings together */
-#define sp_cat(...) sp_cat_v((char*[]) {__VA_ARGS__, NULL})
+#define sp_cat(...) sp_cat_v((const char*[]) {__VA_ARGS__, NULL})
 
 /**
  * Concatenates all given strings together (strings must end with a NULL).
@@ -150,7 +150,7 @@ static char *sp_cat_n_v(const char **strings, size_t length) {
 }
 
 /** Concatenates all given strings together, if srtlen(*strings) < length, length+1 bytes will be allocated */
-#define sp_cat_n(...) sp_cat_n_v((char*[]) {__VA_ARGS__, NULL})
+#define sp_cat_n(...) sp_cat_n_v((const char*[]) {__VA_ARGS__, NULL})
 
 /** Iterates and copies src, end can be larger than the string, also all parameters can be negativ */
 static char *sp_iter(const char *src, int begin, int end, int step) {
@@ -183,8 +183,31 @@ static char *sp_reverse(const char *src) {
     return sp_iter(src, 0, 0, -1);
 }
 
-static char *sp_replace(char *src, const char *from, const char *to);
-// todo
+static char *sp_replace(const char *src, const char *from, const char *to) {
+    int cnt = 0;
+    const char *it_src = src;
+    while(*it_src) {
+        if(strncmp(it_src, from, strlen(from)) == 0) {
+            cnt++;
+            it_src+=strlen(from);
+        } else
+            it_src++;
+    }
+    size_t size = strlen(src) - cnt * strlen(from) + cnt * strlen(to) + 1;
+    char *res = sp_malloc(size);
+    it_src = src;
+    char *it_res = res;
+    while(*it_src) {
+        if(strncmp(it_src, from, strlen(from)) == 0) {
+            strcpy(it_res, to);
+            it_src += strlen(from);
+            it_res += strlen(to);
+        } else
+            *it_res++ = *it_src++;
+    }
+    *it_res = '\0';
+    return res;
+}
 
 
 #endif //UTILC_STRPOOL_H
