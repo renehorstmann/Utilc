@@ -235,7 +235,7 @@ static char *sp_tolower(const char *src) {
 }
 
 /** Sets all characters in the string to upper chars */
-static char *sp_toupper() {
+static char *sp_toupper(const char *src) {
     char *res = sp_clone(src);
     char *it = res;
     while (*it) {
