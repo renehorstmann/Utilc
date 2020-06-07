@@ -117,6 +117,9 @@ int main() {
 
     // will free all created strings from sp_* except of abc
     sp_free();
+
+    // do smth with abc
+    free(abc);
 }
 ```
 
