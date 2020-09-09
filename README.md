@@ -171,27 +171,28 @@ so only the name and value type are needed.
 //...
 
 // define a hash map with a string as key and an int as value
-StrHashMap(IntMap, int)
+// class_name = IntMap, method prefix = int_map
+StrHashMap(int, IntMap, int_map)
 
 int main() {
 
     IntMap map;
-    IntMap_new(&map, 10);
+    int_map_new(&map, 10);
     
     // get and add entry, if not available in the map
-    *IntMap_get(&map, "test") = 1;
-    *IntMap_get(&map, "Hello World") = 3;
-    int *val = IntMap_get(&map, "test");
+    *int_map_get(&map, "test") = 1;
+    *int_map_get(&map, "Hello World") = 3;
+    int *val = int_map_get(&map, "test");
     *val = -1;
 
     //...
 
     // removing the map entry "Hello World"
-    IntMap_remove(&map, "Hello World");
+    int_map_remove(&map, "Hello World");
 
     //...
 
-    IntMap_kill(&map);
+    int_map_kill(&map);
 }
 ```
 
