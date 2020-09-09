@@ -3,7 +3,7 @@
 #include "utilc/dynarray.h"
 
 // defines all functions for a float array
-DynArray(float, FloatArray)
+DynArray(float, FloatArray, float_array)
 
 typedef struct Foo {
     int i;
@@ -11,14 +11,18 @@ typedef struct Foo {
 } Foo;
 
 // defines all functions for a Foo array
-DynArray(Foo, FooArray)
+DynArray(Foo, FooArray, foo_array)
 
 // dynamic string
-DynArray(char, StrArr)
+DynArray(char, StrArr, str_arr)
 
 typedef int point[2];
-// dynamic int[2] (a c array can't be copied, so push and pop would give an error)
-DynArrayWithoutCopy(point, PointArray)
+
+// will not compile, a c array can't be copied, so push and pop would give an error!
+//DynArray(point, PointArray, point_array)
+
+// so we use an an dynamic array without push and pop:
+DynArrayWithoutCopy(point, PointArray, point_array)
 
 int main() {
 
@@ -28,50 +32,50 @@ int main() {
 
     // copy elements into the end of the DynArray
     for(int i=0; i<10; i++)
-        FloatArray_push(&array, (float) i);
+        float_array_push(&array, (float) i);
 
     // creates items in the end of the array and returns its pointers
     for(int i=0; i<5; i++) {
-        float *added = FloatArray_append(&array);
+        float *added = float_array_append(&array);
         *added = (float)(i*i+100);
     }
 
     printf("cap: %zu\n", array.capacity);
     while(array.size)
-        printf("%f\n", FloatArray_pop(&array));
+        printf("%f\n", float_array_pop(&array));
 
 
     // DynArray on the heap
     FooArray *foos = (FooArray*) calloc(1, sizeof(FooArray));
     for(int i=0; i<10; i++)
-        FooArray_push(foos, (Foo){i, 1.5f*(float)i});
+        foo_array_push(foos, (Foo){i, 1.5f*(float)i});
 
     printf("cap: %zu\n", foos->capacity);
     while(foos->size) {
-        Foo f = FooArray_pop(foos);
+        Foo f = foo_array_pop(foos);
         printf("%i %f\n", f.i, f.f);
     }
 
     // dynamic string allocation:
     StrArr str = {0};
-    StrArr_push(&str, 'H');
-    StrArr_push(&str, 'e');
-    StrArr_push(&str, 'l');
-    StrArr_push(&str, 'l');
-    StrArr_push(&str, 'o');
-    char *c = StrArr_append(&str);
+    str_arr_push(&str, 'H');
+    str_arr_push(&str, 'e');
+    str_arr_push(&str, 'l');
+    str_arr_push(&str, 'l');
+    str_arr_push(&str, 'o');
+    char *c = str_arr_append(&str);
     *c = ' ';
-    StrArr_push_array(&str, "World", 6);    // World + '\0'
+    str_arr_push_array(&str, "World", 6);    // World + '\0'
 
     printf("%s\n", str.array);
     //...
-    StrArr_kill(&str);
+    str_arr_kill(&str);
 
     PointArray points = {0};
-    point *p = PointArray_append(&points);
+    point *p = point_array_append(&points);
     (*p)[0] = 20;
     (*p)[1] = 21;
-    int *pi = *PointArray_append(&points);
+    int *pi = *point_array_append(&points);
     pi[0] = 30;
     pi[1] = 31;
 

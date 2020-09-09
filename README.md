@@ -133,27 +133,30 @@ These arrays preallocate memory for faster resizing.
 //...
 
 // define the functions for a dynamic string array
-DynArray(char, StrArr)
+// char is the container type
+// StrArr is the class name
+// str_arr is the prefix for the methods
+DynArray(char, StrArr, str_arr)
 
 int main() {
     StrArr str = {};                // creates a string array
-    StrArr_push(&str, 'H');         // copys a char into the end
-    StrArr_push(&str, 'e');
-    StrArr_push(&str, 'l');
-    StrArr_push(&str, 'l');
-    StrArr_push(&str, 'o');
+    str_arr_push(&str, 'H');        // copies a char into the end
+    str_arr_push(&str, 'e');
+    str_arr_push(&str, 'l');
+    str_arr_push(&str, 'l');
+    str_arr_push(&str, 'o');
 
     // appends a char into the end and returns its pointer    
-    char *c = StrArr_append(&str);  
+    char *c = str_arr_append(&str);  
     *c = ' ';
     
     // copies an array of chars into the string array (6 chars: World + '\0')
-    StrArr_push_array(&str, "World", 6);
+    str_arr_push_array(&str, "World", 6);
     printf("%s", str.array);
     //...
 
     // frees the array
-    StrArr_kill(&str);
+    str_arr_kill(&str);
 }
 ```
 
