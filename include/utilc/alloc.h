@@ -27,12 +27,12 @@ static void *raising_calloc(size_t n, size_t size, int sig) {
 
 /** calls realloc and raises sig if it fails */
 static void *raising_realloc(void *mem, size_t n, size_t size, int sig) {
-    void *mem_new = realloc(mem, n * size);
+    mem = realloc(mem, n * size);
     if(!mem) {
         fprintf(stderr, "realloc failed with n: %zu size: %zu\n", n, size);
         raise(sig);
     }
-    return mem_new;
+    return mem;
 }
 
 /** calls free and sets the pointer NULL (must be a pointer to the address) */
