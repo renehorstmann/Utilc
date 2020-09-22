@@ -5,6 +5,9 @@
 // defines all functions for a float array
 DynArray(float, FloatArray, float_array)
 
+// same as DynArray, but will not raise a signal if an allocation error occurs
+DynArrayTry(float, FloatArrayTry, float_array_try)
+
 typedef struct Foo {
     int i;
     float f;
@@ -28,7 +31,7 @@ int main() {
 
     // creation of a DynArray on the stack
     FloatArray array = {0};
-    // or:  FloatArray array = DynArray_INIT;
+    // or:  FloatArray array = DYN_ARRAY_INIT;
 
     // copy elements into the end of the DynArray
     for(int i=0; i<10; i++)
@@ -81,4 +84,14 @@ int main() {
 
     for(size_t i=0; i<points.size; i++)
         printf("%d + %d\n", points.array[i][0], points.array[i][1]);
+
+
+    FloatArray error = {0};
+    FloatArrayTry error_try = {0};
+
+    float_array_try_resize(&error_try, 99999999999999);
+    printf("%p", (void*) error_try.array);
+
+    // should crash with a signal (DYN_ARRAY_SIGNAL = SIGABRT)
+    // float_array_resize(&error, 99999999999999);
 }
