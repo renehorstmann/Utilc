@@ -43,7 +43,7 @@ int main() {
         *added = (float)(i*i+100);
     }
 
-    printf("cap: %zu\n", array.capacity);
+    printf("cap: %d\n", array.capacity);
     while(array.size)
         printf("%f\n", float_array_pop(&array));
 
@@ -53,7 +53,7 @@ int main() {
     for(int i=0; i<10; i++)
         foo_array_push(foos, (Foo){i, 1.5f*(float)i});
 
-    printf("cap: %zu\n", foos->capacity);
+    printf("cap: %d\n", foos->capacity);
     while(foos->size) {
         Foo f = foo_array_pop(foos);
         printf("%i %f\n", f.i, f.f);
@@ -82,14 +82,14 @@ int main() {
     pi[0] = 30;
     pi[1] = 31;
 
-    for(size_t i=0; i<points.size; i++)
+    for(int i=0; i<points.size; i++)
         printf("%d + %d\n", points.array[i][0], points.array[i][1]);
 
 
     FloatArray error = {0};
     FloatArrayTry error_try = {0};
 
-    float_array_try_resize(&error_try, 99999999999999);
+    float_array_try_resize(&error_try, 9999999999);
     printf("%p", (void*) error_try.array);
 
     // should crash with a signal (DYN_ARRAY_SIGNAL = SIGABRT)

@@ -25,8 +25,8 @@
 #define DynArray(type, class_name, fn_name) \
 typedef struct { \
     type *array; \
-    size_t capacity; \
-    size_t size; \
+    int capacity; \
+    int size; \
 } class_name; \
 static void fn_name ## _kill(class_name *self) { \
     free(self->array); \
@@ -34,10 +34,10 @@ static void fn_name ## _kill(class_name *self) { \
     self->capacity = 0; \
     self->size = 0; \
 } \
-static void fn_name ## _set_capacity(class_name *self, size_t capacity) { \
+static void fn_name ## _set_capacity(class_name *self, int capacity) { \
     type *new_array = (type *) realloc(self->array, capacity * sizeof(type)); \
     if (!new_array) { \
-        fprintf(stderr, #fn_name "_set_capacity failed with capacity: %zu\n", capacity); \
+        fprintf(stderr, #fn_name "_set_capacity failed with capacity: %d\n", capacity); \
         raise(DYN_ARRAY_SIGNAL); \
     } \
     self->array = new_array; \
@@ -45,7 +45,7 @@ static void fn_name ## _set_capacity(class_name *self, size_t capacity) { \
     if (self->size > capacity) \
     self->size = capacity; \
 } \
-static void fn_name ## _resize(class_name *self, size_t size) { \
+static void fn_name ## _resize(class_name *self, int size) { \
     if (size > self->capacity) \
         fn_name ## _set_capacity(self, size * 2); \
     self->size = size; \
@@ -54,7 +54,7 @@ static void fn_name ## _push(class_name *self, type item) { \
     fn_name ## _resize(self, self->size+1); \
     self->array[self->size-1] = item; \
 } \
-static void fn_name ## _push_array(class_name *self, const type *item_array, size_t n) { \
+static void fn_name ## _push_array(class_name *self, const type *item_array, int n) { \
     fn_name ## _resize(self, self->size+n); \
     for(int i=0; i<n; i++)\
         self->array[self->size-n+i] = item_array[i]; \
@@ -82,8 +82,8 @@ static type fn_name ## _pop(class_name *self) { \
 #define DynArrayTry(type, class_name, fn_name) \
 typedef struct { \
     type *array; \
-    size_t capacity; \
-    size_t size; \
+    int capacity; \
+    int size; \
 } class_name; \
 static void fn_name ## _kill(class_name *self) { \
     free(self->array); \
@@ -91,7 +91,7 @@ static void fn_name ## _kill(class_name *self) { \
     self->capacity = 0; \
     self->size = 0; \
 } \
-static void fn_name ## _set_capacity(class_name *self, size_t capacity) { \
+static void fn_name ## _set_capacity(class_name *self, int capacity) { \
     type *new_array = (type *) realloc(self->array, capacity * sizeof(type)); \
     if (new_array) { \
         self->array = new_array; \
@@ -100,7 +100,7 @@ static void fn_name ## _set_capacity(class_name *self, size_t capacity) { \
             self->size = capacity; \
     } \
 } \
-static void fn_name ## _resize(class_name *self, size_t size) { \
+static void fn_name ## _resize(class_name *self, int size) { \
     if (size > self->capacity) { \
         fn_name ## _set_capacity(self, size * 2); \
         if(size>self->capacity) \
@@ -113,7 +113,7 @@ static void fn_name ## _push(class_name *self, type item) { \
     fn_name ## _resize(self, self->size+1); \
     self->array[self->size-1] = item; \
 } \
-static void fn_name ## _push_array(class_name *self, const type *item_array, size_t n) { \
+static void fn_name ## _push_array(class_name *self, const type *item_array, int n) { \
     fn_name ## _resize(self, self->size+n); \
     for(int i=0; i<n; i++)\
         self->array[self->size-n+i] = item_array[i]; \
@@ -145,8 +145,8 @@ static type fn_name ## _pop(class_name *self) { \
 #define DynArrayWithoutCopy(type, class_name, fn_name) \
 typedef struct { \
     type *array; \
-    size_t capacity; \
-    size_t size; \
+    int capacity; \
+    int size; \
 } class_name; \
 static void fn_name ## _kill(class_name *self) { \
     free(self->array); \
@@ -154,10 +154,10 @@ static void fn_name ## _kill(class_name *self) { \
     self->capacity = 0; \
     self->size = 0; \
 } \
-static void fn_name ## _set_capacity(class_name *self, size_t capacity) { \
+static void fn_name ## _set_capacity(class_name *self, int capacity) { \
     type *new_array = (type *) realloc(self->array, capacity * sizeof(type)); \
     if (!new_array) { \
-        fprintf(stderr, #fn_name "_set_capacity failed with capacity: %zu\n", capacity); \
+        fprintf(stderr, #fn_name "_set_capacity failed with capacity: %d\n", capacity); \
         raise(DYN_ARRAY_SIGNAL); \
     } \
     self->array = new_array; \
@@ -165,7 +165,7 @@ static void fn_name ## _set_capacity(class_name *self, size_t capacity) { \
     if (self->size > capacity) \
     self->size = capacity; \
 } \
-static void fn_name ## _resize(class_name *self, size_t size) { \
+static void fn_name ## _resize(class_name *self, int size) { \
     if (size > self->capacity) \
         fn_name ## _set_capacity(self, size * 2); \
     self->size = size; \
@@ -188,8 +188,8 @@ static type *fn_name ## _append(class_name *self) { \
 #define DynArrayTryWithoutCopy(type, class_name, fn_name) \
 typedef struct { \
     type *array; \
-    size_t capacity; \
-    size_t size; \
+    int capacity; \
+    int size; \
 } class_name; \
 static void fn_name ## _kill(class_name *self) { \
     free(self->array); \
@@ -197,7 +197,7 @@ static void fn_name ## _kill(class_name *self) { \
     self->capacity = 0; \
     self->size = 0; \
 } \
-static void fn_name ## _set_capacity(class_name *self, size_t capacity) { \
+static void fn_name ## _set_capacity(class_name *self, int capacity) { \
     type *new_array = (type *) realloc(self->array, capacity * sizeof(type)); \
     if (new_array) { \
         self->array = new_array; \
@@ -206,7 +206,7 @@ static void fn_name ## _set_capacity(class_name *self, size_t capacity) { \
             self->size = capacity; \
     } \
 } \
-static void fn_name ## _resize(class_name *self, size_t size) { \
+static void fn_name ## _resize(class_name *self, int size) { \
     if (size > self->capacity) { \
         fn_name ## _set_capacity(self, size * 2); \
         if(size>self->capacity) \
