@@ -23,7 +23,7 @@
  * <fn_name>_pop returns a copy of the last item and removes it from the array.
  */
 #define DynArray(type, class_name, fn_name) \
-typedef struct class_name { \
+typedef struct { \
     type *array; \
     size_t capacity; \
     size_t size; \
@@ -80,7 +80,7 @@ static type fn_name ## _pop(class_name *self) { \
  * <fn_name>_pop returns a copy of the last item and removes it from the array.
  */
 #define DynArrayTry(type, class_name, fn_name) \
-typedef struct class_name { \
+typedef struct { \
     type *array; \
     size_t capacity; \
     size_t size; \
@@ -143,7 +143,7 @@ static type fn_name ## _pop(class_name *self) { \
  * <fn_name>_append creates an item at the end and returns its pointer (returns the last element).
  */
 #define DynArrayWithoutCopy(type, class_name, fn_name) \
-typedef struct class_name { \
+typedef struct { \
     type *array; \
     size_t capacity; \
     size_t size; \
@@ -186,7 +186,7 @@ static type *fn_name ## _append(class_name *self) { \
  * <fn_name>_append creates an item at the end and returns its pointer (returns the last element).
  */
 #define DynArrayTryWithoutCopy(type, class_name, fn_name) \
-typedef struct class_name { \
+typedef struct { \
     type *array; \
     size_t capacity; \
     size_t size; \
