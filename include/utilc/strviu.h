@@ -529,11 +529,22 @@ static void sv_cpy(char *dst, strviu viu) {
     dst[len] = 0;
 }
 
-/** Copies the StrViu viu into the cstring dst, but maximal max_characters_n wide */
-static void sv_ncpy(char *dst, strviu viu, int max_characters_n) {
-    int len = sv_length(viu) < max_characters_n ? sv_length(viu) : max_characters_n-1;
+/** Concatenates viu behind dst */
+static void sv_cat(char *dst, strviu viu) {
+    sv_cpy(dst + strlen(dst), viu);
+}
+
+/** Copies the StrViu viu into the cstring dst, but maximal max_buffer_n wide */
+static void sv_ncpy(char *dst, strviu viu, int max_buffer_n) {
+    int len = sv_length(viu) < max_buffer_n ? sv_length(viu) : max_buffer_n-1;
     strncpy(dst, viu.begin, len);
     dst[len] = 0;
+}
+
+/** Concatenates viu behind dst, but maximal max_buffer_n wide for the whole string */
+static void sv_ncat(char *dst, strviu viu, int max_buffer_n) {
+    int max_viu = max_buffer_n - strlen(dst);
+    sv_ncpy(dst + strlen(dst), viu, max_viu);
 }
 
 /** @return: The StrViu viu into a cstring on the heap */
