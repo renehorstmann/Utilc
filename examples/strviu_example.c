@@ -8,14 +8,17 @@ int main() {
     // hello world
     const char *cstring = " \t  Hallo Welt  \t\n  ";
     strviu viu = ToStrViu(cstring);
-    printf("start: <%s>\n", sv_heap_cpy(viu));
+    printf("start: ");
+    sv_print(viu);
 
     viu = sv_strip(viu, ' ');   //stripping whitespace uses isspace internally
-    printf("strip: <%s>\n", sv_heap_cpy(viu));
+    printf("strip: ");
+    sv_print(viu);
 
     strviuarray splits = sv_split(viu, ' ');
-    for(size_t i=0; i<splits.size; i++) {
-        printf("split[%zu]: <%s>\n", i, sv_heap_cpy(splits.array[i]));
+    for(int i=0; i<splits.size; i++) {
+        printf("split[%d]: ", i);
+        sv_print(splits.array[i]);
     }
 
     // determine function parameters:
@@ -28,8 +31,9 @@ int main() {
 
     printf("paremeters: <%s>\n", sv_heap_cpy(viu));
     splits = sv_split(viu, ',');
-    for(size_t i=0; i<splits.size; i++) {
-        printf("parameter[%zu] <%s>\n", i, sv_heap_cpy(sv_strip(splits.array[i], ' ')));
+    for(int i=0; i<splits.size; i++) {
+        printf("parameter[%d] ", i);
+        sv_print(sv_strip(splits.array[i], ' '));
     }
 
 
@@ -41,15 +45,15 @@ int main() {
 
 
     // program will print:
-    //start: < 	  Hallo Welt
-    //  >
-    //strip: <Hallo Welt>
-    //split[0]: <Hallo>
-    //split[1]: <Welt>
+    //start: (strviu) { 	  Hallo Welt
+    //  }
+    //strip: (strviu) {Hallo Welt}
+    //split[0]: (strviu) {Hallo}
+    //split[1]: (strviu) {Welt}
     //paremeters: <const char *src  , char *dst
     //, int n>
-    //parameter[0] <const char *src>
-    //parameter[1] <char *dst>
-    //parameter[2] <int n)>
+    //parameter[0] (strviu) {const char *src}
+    //parameter[1] (strviu) {char *dst}
+    //parameter[2] (strviu) {int n}
     //ptr_fun has 4 *
 }

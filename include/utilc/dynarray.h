@@ -1,8 +1,8 @@
 #ifndef UTILC_DYNARRAY_H
 #define UTILC_DYNARRAY_H
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <signal.h>
 
 #ifndef DYN_ARRAY_SIGNAL
