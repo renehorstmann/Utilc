@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "utilc/strviu.h"
 
 

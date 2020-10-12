@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 
 #include "utilc/dynarray.h"
 
@@ -86,12 +87,11 @@ int main() {
         printf("%d + %d\n", points.array[i][0], points.array[i][1]);
 
 
-    FloatArray error = {0};
     FloatArrayTry error_try = {0};
-
-    float_array_try_resize(&error_try, 9999999999);
+    float_array_try_resize(&error_try, INT_MAX);
     printf("%p", (void*) error_try.array);
 
     // should crash with a signal (DYN_ARRAY_SIGNAL = SIGABRT)
-    // float_array_resize(&error, 99999999999999);
+    // FloatArray error = {0};
+    // float_array_resize(&error, INT_MAX);
 }
