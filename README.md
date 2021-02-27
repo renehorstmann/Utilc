@@ -300,7 +300,7 @@ int main() {
 
 
 ## <a name="S-Assume"></a>Assume
-The file [assume.h](include/utilc/assume.h) includes a macro to make a runtime assumtion.
+The file [assume.h](include/utilc/assume.h) includes a macro to make a runtime assumption.
 It works like an improved version of assert, that raises SIGABRT, even if NDEBUG is defined.
 If NDEBUG is defined, only the message will be displayed, without expression, file and line info.
 assume is also a formatted version like printf
