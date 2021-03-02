@@ -6,15 +6,29 @@ Copy a header file for its library to your project and have fun.
 The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 
 ### Libraries
-* [StrViu](#S-StrViu): string view and functions for it
-* [StrViuParse](#S-StrViuParse): additional parsing functions for StrViu
-* [StrPool](#S-StrPool): string pool functions to easily free generated strings
-* [DynArray](#S-DynArray): creates a dynamic array of a given type
-* [HashMap](#S-HashMap): creates a hashmap for a given key and value type
-* [Iterator](#S-Iterator): interface for iterating over ranges or indices
-* [Alloc](#S-Alloc): create space on the heap with error check
-* [CleanUp](#S-CleanUp): handles clean ups for a function
-* [Assume](#S-Assume): Assertion that also works in release mode
+- [StrViu](#S-StrViu): string view and functions for it
+- [StrViuParse](#S-StrViuParse): additional parsing functions for StrViu
+- [StrPool](#S-StrPool): string pool functions to easily free generated strings
+- [DynArray](#S-DynArray): creates a dynamic array of a given type
+- [HashMap](#S-HashMap): creates a hashmap for a given key and value type
+- [Iterator](#S-Iterator): interface for iterating over ranges or indices
+- [Alloc](#S-Alloc): create space on the heap with error check
+- [CleanUp](#S-CleanUp): handles clean ups for a function
+- [Assume](#S-Assume): Assertion that also works in release mode
+
+### Todo
+- DynArray + HashMap in new style:
+```c
+#define Type int
+#define Name IntArray
+#define FunName int_array
+#include "dynarray.h"
+```
+
+- Common header:
+  - monotonic() -> double monotonic time
+  - expand_path(char *path, const char *src, int max_n) -> expands ~
+  - ...
 
 
 ## <a name="S-StrViu"></a>StrViu
