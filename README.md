@@ -23,6 +23,11 @@ The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
 #define Name IntArray
 #define FunName int_array
 #include "dynarray.h"
+
+- Allocators
+  - stack, malloc...
+- str + str_buf
+- print?
 ```
 
 - Common header:
