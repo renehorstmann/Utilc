@@ -1,6 +1,9 @@
 # Utilc
 Some independent single header file libraries for C(++) programming.
 
+## Deprecated
+Have a look at [rhc](https://github.com/renehorstmann/rhc).
+
 ## Getting Started
 Copy a header file for its library to your project and have fun.
 The libraries are written in C and compatible with C++ (tested on GCC 7.4.0)
