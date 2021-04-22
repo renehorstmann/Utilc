@@ -2,7 +2,8 @@
 Some independent single header file libraries for C(++) programming.
 
 ## Deprecated
-Have a look at [rhc](https://github.com/renehorstmann/rhc).
+Utilc is now deprecated.
+Have a look at [rhc](https://github.com/renehorstmann/rhc) instead.
 
 ## Getting Started
 Copy a header file for its library to your project and have fun.
